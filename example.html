@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>Sanrio Emotion Game</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    .page {
+      display: none;
+      padding: 40px;
+      box-sizing: border-box;
+      height: 100%;
+      background-image: url('sanrio-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .active {
+      display: block;
+    }
+
+    .button, .emotion-btn, .back-btn {
+      font-size: 22px;
+      padding: 16px 28px;
+      margin: 14px;
+      border: none;
+      border-radius: 10px;
+      background: #ffb6c1;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .button:hover, .emotion-btn:hover, .back-btn:hover {
+      background: #ff69b4;
+    }
+
+    .emotion-btn {
+      display: inline-block;
+      width: 140px;
+      height: 180px;
+      background: #fff;
+      color: #333;
+      border: 2px solid #ffb6c1;
+      vertical-align: top;
+      box-shadow: 2px 2px 8px #ffd6e6;
+      padding: 10px;
+    }
+
+    .emotion-img, #advice-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+
+    h1, h2, p{
+      color: #d72660;
+      margin-top: 0;
+    }
+
+    .advice {
+      font-size: 28px;
+      margin: 40px 0 10px;
+      color: #333;
+    }
+
+    .back-btn {
+      background: #c2b7f7;
+    }
+
+    .back-btn:hover {
+      background: #7c6ee6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page 1: Start -->
+  <div id="start-page" class="page active">
+    <img src="https://media.tenor.com/qslUlaGUdEwAAAAi/cinnamoroll-cute.gif" alt="Sanrio GIF" style="width:200px;">
+    <h1>Welcome to SanrioFeels</h1>
+    <button class="button" onclick="goToPage('emotion-page')">Feeling Time 💖</button>
+    <br><br>
+    <p>for Mira, with love</p>💗
+  </div>
+
+  <!-- Page 2: Emotion Selection -->
+  <div id="emotion-page" class="page">
+    <h2>How are you feeling?</h2>
+    <div>
+      <button class="emotion-btn" onclick="showAdvice(0)">
+        <img src="pompompurin2.png" alt="Sleepy" class="emotion-img">
+        Sleepy
+      </button>
+      <button class="emotion-btn" onclick="showAdvice(1)">
+        <img src="pochacco2.png" alt="Sad" class="emotion-img">
+        Sad
+      </button>
+      <button class="emotion-btn" onclick="showAdvice(2)">
+        <img src="kuromi2.png" alt="Tired" class="emotion-img">
+        Tired
+      </button>
+      <button class="emotion-btn" onclick="showAdvice(3)">
+        <img src="mymelody2.png" alt="Happy" class="emotion-img">
+        Happy
+      </button>
+      <button class="emotion-btn" onclick="showAdvice(4)">
+        <img src="hellokitty2.png" alt="Angry" class="emotion-img">
+        Angry
+      </button>
+      <button class="emotion-btn" onclick="showAdvice(5)">
+        <img src="cinnamoroll2.png" alt="Excited" class="emotion-img">
+        Excited
+      </button>
+      <button class="emotion-btn" onclick="showAdvice(6)">
+        <img src="badtzmaru2.png" alt="Scared" class="emotion-img">
+        Scared
+      </button>
+      <button class="emotion-btn" onclick="showAdvice(7)">
+        <img src="keroppi2.png" alt="Bored" class="emotion-img">
+        Bored
+      </button>
+    </div>
+    <button class="back-btn" onclick="goToPage('start-page')">Back</button>
+  </div>
+
+  <!-- Page 3: Advice Page -->
+  <div id="advice-page" class="page">
+    <h2 id="emotion-title"></h2>
+    <img id="advice-img" src="" alt="Emotion Character">
+    <div class="advice" id="advice-text"></div>
+    <button class="back-btn" onclick="goToPage('emotion-page')">Back</button>
+  </div>
+
+  <script>
+    const emotions = [
+      ["Sleepy", "pompompurin.png", [
+        "Take a nap and rest!",
+        "Try closing your eyes for a few minutes.",
+        "Maybe it's time for a cozy blanket!",
+        "Listen to some soft music.",
+        "Go get some rest, sleepyhead."
+      ]],
+      ["Sad", "pochacco.png", [
+        "Talk to your loved one.",
+        "It's okay to feel sad sometimes.",
+        "Listen to your favorite song.",
+        "Write down your feelings.",
+        "Watch a comforting movie."
+      ]],
+      ["Tired", "kuromi.png", [
+        "Drink some water and stretch.",
+        "Take a short walk.",
+        "Try to get some fresh air.",
+        "Have a healthy snack.",
+        "Do some gentle stretches."
+      ]],
+      ["Happy", "my_melody.png", [
+        "Share your smile with a friend!",
+        "Spread your happiness today.",
+        "Dance to your favorite tune!",
+        "Draw a picture of your happiness.",
+        "Tell someone why you’re happy."
+      ]],
+      ["Angry", "hello_kitty.png", [
+        "Take deep breaths and count to ten.",
+        "Try drawing your feelings.",
+        "Go for a walk to cool down.",
+        "Write down what's bothering you.",
+        "It’s okay to be angry — it means something mattered to you."
+      ]],
+      ["Excited", "cinnamoroll.png", [
+        "Dance or sing your favorite song!",
+        "Share your excitement with someone.",
+        "Write down what makes you excited.",
+        "Jump around and celebrate!",
+        "Draw a picture of your excitement."
+      ]],
+      ["Scared", "badtzmaru.png", [
+        "Hug your favorite plushie.",
+        "Talk to someone you trust.",
+        "Remember, you're brave!",
+        "Take a few deep breaths.",
+        "Think of a happy memory."
+      ]],
+      ["Bored", "keroppi.png", [
+        "Try drawing or making something new!",
+        "Read a fun story.",
+        "Invent a new game to play.",
+        "Build something with blocks or toys.",
+        "Make up a silly dance."
+      ]]
+    ];
+
+    function goToPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function showAdvice(i) {
+      document.getElementById('emotion-title').textContent = emotions[i][0];
+      document.getElementById('advice-img').src = emotions[i][1];
+      document.getElementById('advice-img').alt = emotions[i][0];
+
+      const comments = emotions[i][2];
+      const randomIndex = Math.floor(Math.random() * comments.length);
+      document.getElementById('advice-text').textContent = comments[randomIndex];
+
+      goToPage('advice-page');
+    }
+  </script>
+</body>
+</html>
