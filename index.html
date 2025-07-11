@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sanrio Emotion Game</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body, html {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       font-family: Arial, sans-serif;
       text-align: center;
+      background-color: #fff;
     }
 
     .page {
       display: none;
-      padding: 40px;
-      box-sizing: border-box;
-      height: 100%;
-      background-image: url('sanrio-bg.png');
+      padding: 40px 20px;
+      min-height: 100vh;
+      background-image: url('images/sanrio-bg.png');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -30,10 +33,16 @@
       display: block;
     }
 
+    h1, h2, p{
+      color: #d72660;
+      margin-top: 0;
+      font-size: 2rem;
+    }
+
     .button, .emotion-btn, .back-btn {
-      font-size: 22px;
-      padding: 16px 28px;
-      margin: 14px;
+      font-size: 1.1rem;
+      padding: 14px 24px;
+      margin: 10px;
       border: none;
       border-radius: 10px;
       background: #ffb6c1;
@@ -47,33 +56,37 @@
     }
 
     .emotion-btn {
-      display: inline-block;
-      width: 140px;
-      height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 42%;
+      max-width: 150px;
+      height: 160px;
+      margin: 8px;
       background: #fff;
       color: #333;
       border: 2px solid #ffb6c1;
-      vertical-align: top;
       box-shadow: 2px 2px 8px #ffd6e6;
-      padding: 10px;
+    }
+
+    .emotions-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     .emotion-img, #advice-img {
-      width: 80px;
-      height: 80px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       object-fit: cover;
-      margin-bottom: 10px;
-    }
-
-    h1, h2, p{
-      color: #d72660;
-      margin-top: 0;
+      margin-bottom: 8px;
     }
 
     .advice {
-      font-size: 28px;
-      margin: 40px 0 10px;
+      font-size: 1.5rem;
+      margin: 20px 0;
       color: #333;
     }
 
@@ -83,6 +96,32 @@
 
     .back-btn:hover {
       background: #7c6ee6;
+    }
+
+    @media (max-width: 768px) {
+      h1, h2 {
+        font-size: 1.6rem;
+      }
+
+      .emotion-btn {
+        width: 44%;
+        height: 140px;
+        font-size: 0.9rem;
+      }
+
+      .button, .back-btn {
+        font-size: 1rem;
+        padding: 12px 18px;
+      }
+
+      .advice {
+        font-size: 1.2rem;
+        padding: 0 10px;
+      }
+
+      img[alt="Sanrio GIF"] {
+        width: 140px;
+      }
     }
   </style>
 </head>
@@ -100,37 +139,37 @@
   <!-- Page 2: Emotion Selection -->
   <div id="emotion-page" class="page">
     <h2>How are you feeling?</h2>
-    <div>
+    <div class="emotions-container">
       <button class="emotion-btn" onclick="showAdvice(0)">
-        <img src="pompompurin2.png" alt="Sleepy" class="emotion-img">
+        <img src="images/pompompurin2.png" alt="Sleepy" class="emotion-img">
         Sleepy
       </button>
       <button class="emotion-btn" onclick="showAdvice(1)">
-        <img src="pochacco2.png" alt="Sad" class="emotion-img">
+        <img src="images/pochacco2.png" alt="Sad" class="emotion-img">
         Sad
       </button>
       <button class="emotion-btn" onclick="showAdvice(2)">
-        <img src="kuromi2.png" alt="Tired" class="emotion-img">
+        <img src="images/kuromi2.png" alt="Tired" class="emotion-img">
         Tired
       </button>
       <button class="emotion-btn" onclick="showAdvice(3)">
-        <img src="mymelody2.png" alt="Happy" class="emotion-img">
+        <img src="images/mymelody2.png" alt="Happy" class="emotion-img">
         Happy
       </button>
       <button class="emotion-btn" onclick="showAdvice(4)">
-        <img src="hellokitty2.png" alt="Angry" class="emotion-img">
+        <img src="images/hellokitty2.png" alt="Angry" class="emotion-img">
         Angry
       </button>
       <button class="emotion-btn" onclick="showAdvice(5)">
-        <img src="cinnamoroll2.png" alt="Excited" class="emotion-img">
+        <img src="images/cinnamoroll2.png" alt="Excited" class="emotion-img">
         Excited
       </button>
       <button class="emotion-btn" onclick="showAdvice(6)">
-        <img src="badtzmaru2.png" alt="Scared" class="emotion-img">
+        <img src="images/badtzmaru2.png" alt="Scared" class="emotion-img">
         Scared
       </button>
       <button class="emotion-btn" onclick="showAdvice(7)">
-        <img src="keroppi2.png" alt="Bored" class="emotion-img">
+        <img src="images/keroppi2.png" alt="Bored" class="emotion-img">
         Bored
       </button>
     </div>
@@ -147,56 +186,56 @@
 
   <script>
     const emotions = [
-      ["Sleepy", "pompompurin.png", [
+      ["Sleepy", "images/pompompurin.png", [
         "Take a nap and rest!",
         "Try closing your eyes for a few minutes.",
         "Maybe it's time for a cozy blanket!",
         "Listen to some soft music.",
         "Go get some rest, sleepyhead."
       ]],
-      ["Sad", "pochacco.png", [
+      ["Sad", "images/pochacco.png", [
         "Talk to your loved one.",
         "It's okay to feel sad sometimes.",
         "Listen to your favorite song.",
         "Write down your feelings.",
         "Watch a comforting movie."
       ]],
-      ["Tired", "kuromi.png", [
+      ["Tired", "images/kuromi.png", [
         "Drink some water and stretch.",
         "Take a short walk.",
         "Try to get some fresh air.",
         "Have a healthy snack.",
         "Do some gentle stretches."
       ]],
-      ["Happy", "my_melody.png", [
+      ["Happy", "images/my_melody.png", [
         "Share your smile with a friend!",
         "Spread your happiness today.",
         "Dance to your favorite tune!",
         "Draw a picture of your happiness.",
         "Tell someone why you’re happy."
       ]],
-      ["Angry", "hello_kitty.png", [
+      ["Angry", "images/hello_kitty.png", [
         "Take deep breaths and count to ten.",
         "Try drawing your feelings.",
         "Go for a walk to cool down.",
         "Write down what's bothering you.",
         "It’s okay to be angry — it means something mattered to you."
       ]],
-      ["Excited", "cinnamoroll.png", [
+      ["Excited", "images/cinnamoroll.png", [
         "Dance or sing your favorite song!",
         "Share your excitement with someone.",
         "Write down what makes you excited.",
         "Jump around and celebrate!",
         "Draw a picture of your excitement."
       ]],
-      ["Scared", "badtzmaru.png", [
+      ["Scared", "images/badtzmaru.png", [
         "Hug your favorite plushie.",
         "Talk to someone you trust.",
         "Remember, you're brave!",
         "Take a few deep breaths.",
         "Think of a happy memory."
       ]],
-      ["Bored", "keroppi.png", [
+      ["Bored", "images/keroppi.png", [
         "Try drawing or making something new!",
         "Read a fun story.",
         "Invent a new game to play.",
